@@ -7,9 +7,13 @@ import {
   deleteSupportTicket,
 } from './supportTicket.controller';
 
+import { adminOnly, authenticated } from "../middleware/bearAuth";
+
 const supportTicketRoutes = (app: Express) => {
   // Get all support tickets
-  app.get('/support-tickets', async (req, res, next) => {
+  app.get('/support-tickets', 
+    adminOnly,
+    async (req, res, next) => {
     try {
       await getAllSupportTickets(req, res);
     } catch (error) {
@@ -18,7 +22,9 @@ const supportTicketRoutes = (app: Express) => {
   });
 
   // Get ticket by ID
-  app.get('/support-tickets/:id', async (req, res, next) => {
+  app.get('/support-tickets/:id',
+    authenticated,
+     async (req, res, next) => {
     try {
       await getSupportTicketById(req, res);
     } catch (error) {
@@ -26,8 +32,10 @@ const supportTicketRoutes = (app: Express) => {
     }
   });
 
-  // Create ticket
-  app.post('/support-tickets', async (req, res, next) => {
+  // Create ticket(users)
+  app.post('/support-tickets',
+    authenticated,
+     async (req, res, next) => {
     try {
       await createSupportTicket(req, res);
     } catch (error) {
@@ -36,7 +44,9 @@ const supportTicketRoutes = (app: Express) => {
   });
 
   // Update ticket
-  app.put('/support-tickets/:id', async (req, res, next) => {
+  app.put('/support-tickets/:id', 
+    authenticated,
+    async (req, res, next) => {
     try {
       await updateSupportTicket(req, res);
     } catch (error) {
@@ -44,8 +54,10 @@ const supportTicketRoutes = (app: Express) => {
     }
   });
 
-  // Delete ticket
-  app.delete('/support-tickets/:id', async (req, res, next) => {
+  // Delete ticket(user)
+  app.delete('/support-tickets/:id', 
+    authenticated,
+    async (req, res, next) => {
     try {
       await deleteSupportTicket(req, res);
     } catch (error) {

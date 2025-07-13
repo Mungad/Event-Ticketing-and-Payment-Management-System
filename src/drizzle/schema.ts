@@ -26,6 +26,7 @@ export const UsersTable = pgTable("users", {
   contact_phone: varchar("contact_phone", { length: 20 }),
   address: text("address"),
   role: RoleEnum("role").default("user"),
+  verification_code: varchar("verification_code", { length: 10 }),
   is_verified: boolean("is_verified").default(false),
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),

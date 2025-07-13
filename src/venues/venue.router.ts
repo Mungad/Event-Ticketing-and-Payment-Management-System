@@ -7,6 +7,7 @@ import {
     deleteVenue,
 } from "./venue.controller";
 
+import { adminOnly, authenticated } from "../middleware/bearAuth";
 
 const venueRoutes = (app: Express) => {
     
@@ -31,6 +32,7 @@ const venueRoutes = (app: Express) => {
     
     // Create venue (Admin only)
     app.post("/venues",
+        adminOnly,
          async (req, res, next) => {
         try {
             await createVenue(req, res);
@@ -40,7 +42,9 @@ const venueRoutes = (app: Express) => {
     });
     
     // Update venue (Admin only)
-    app.put("/venues/:id", async (req, res, next) => {
+    app.put("/venues/:id",
+        adminOnly,
+         async (req, res, next) => {
         try {
             await updateVenue(req, res);
         } catch (error) {
@@ -50,6 +54,7 @@ const venueRoutes = (app: Express) => {
     
     // Delete venue (Admin only)
     app.delete("/venues/:id",
+        adminOnly,
          async (req, res, next) => {
         try {
             await deleteVenue(req, res);

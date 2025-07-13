@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import * as venueService from './venue.service';
 
 // GET all venues
-export const getAllVenues = async (req: Request, res: Response) => {
+export const getAllVenues = async (_req: Request, res: Response) => {
     try {
         const venues = await venueService.getAll();
         res.status(200).json(venues);

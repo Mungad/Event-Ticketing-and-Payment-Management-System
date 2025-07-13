@@ -6,10 +6,13 @@ import {
   updateTicketOrder,
   deleteTicketOrder,
 } from './ticketOrder.controller';
+import { adminOnly,authenticated } from '../middleware/bearAuth';
 
 const ticketOrderRoutes = (app: Express) => {
   // Get all ticket orders
-  app.get('/ticket-orders', async (req, res, next) => {
+  app.get('/ticket-orders',
+    authenticated,
+     async (req, res, next) => {
     try {
       await getAllTicketOrders(req, res);
     } catch (error) {
@@ -18,7 +21,9 @@ const ticketOrderRoutes = (app: Express) => {
   });
 
   // Get order by ID
-  app.get('/ticket-orders/:id', async (req, res, next) => {
+  app.get('/ticket-orders/:id',
+    authenticated,
+     async (req, res, next) => {
     try {
       await getTicketOrderById(req, res);
     } catch (error) {
@@ -27,7 +32,9 @@ const ticketOrderRoutes = (app: Express) => {
   });
 
   // Create order
-  app.post('/ticket-orders', async (req, res, next) => {
+  app.post('/ticket-orders',
+    authenticated,
+     async (req, res, next) => {
     try {
       await createTicketOrder(req, res);
     } catch (error) {
@@ -36,7 +43,9 @@ const ticketOrderRoutes = (app: Express) => {
   });
 
   // Update order
-  app.put('/ticket-orders/:id', async (req, res, next) => {
+  app.put('/ticket-orders/:id',
+    authenticated,
+     async (req, res, next) => {
     try {
       await updateTicketOrder(req, res);
     } catch (error) {
@@ -45,7 +54,9 @@ const ticketOrderRoutes = (app: Express) => {
   });
 
   // Delete order
-  app.delete('/ticket-orders/:id', async (req, res, next) => {
+  app.delete('/ticket-orders/:id',
+    adminOnly,
+     async (req, res, next) => {
     try {
       await deleteTicketOrder(req, res);
     } catch (error) {

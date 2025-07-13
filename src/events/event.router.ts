@@ -7,8 +7,10 @@ import {
   deleteEvent,
 } from './event.controller';
 
+import { adminOnly } from "../middleware/bearAuth";
+
 const eventRoutes = (app: Express) => {
-  // Get all events
+  // Get all events(public)
   app.get('/events', async (req, res, next) => {
     try {
       await getAllEvents(req, res);
@@ -17,7 +19,7 @@ const eventRoutes = (app: Express) => {
     }
   });
 
-  // Get event by ID
+  // Get event by ID(public)
   app.get('/events/:id', async (req, res, next) => {
     try {
       await getEventById(req, res);
@@ -26,8 +28,10 @@ const eventRoutes = (app: Express) => {
     }
   });
 
-  // Create new event
-  app.post('/events', async (req, res, next) => {
+  // Create new event(Admin only)
+  app.post('/events',
+    adminOnly,
+     async (req, res, next) => {
     try {
       await createEvent(req, res);
     } catch (error) {
@@ -36,7 +40,9 @@ const eventRoutes = (app: Express) => {
   });
 
   // Update event
-  app.put('/events/:id', async (req, res, next) => {
+  app.put('/events/:id', 
+    adminOnly,
+    async (req, res, next) => {
     try {
       await updateEvent(req, res);
     } catch (error) {
@@ -45,7 +51,9 @@ const eventRoutes = (app: Express) => {
   });
 
   // Delete event
-  app.delete('/events/:id', async (req, res, next) => {
+  app.delete('/events/:id', 
+    adminOnly,
+    async (req, res, next) => {
     try {
       await deleteEvent(req, res);
     } catch (error) {
