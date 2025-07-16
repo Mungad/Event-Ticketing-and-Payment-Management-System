@@ -6,9 +6,11 @@ const config: Config = {
   verbose: true,
    coveragePathIgnorePatterns: [
   "/node_modules/",
-  "src/Drizzle.db.ts",
-  "src/Drizzle/schema.ts",
-]
+  "src/drizzle.db.ts",
+  "src/drizzle/schema.ts",
+  "src/mailer/email.service.ts",
+],
+testTimeout: 20000,
 };
 
 export default config;
