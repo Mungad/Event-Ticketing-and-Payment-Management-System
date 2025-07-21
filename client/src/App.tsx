@@ -1,29 +1,34 @@
+import { createBrowserRouter, RouterProvider } from 'react-router'
+import './App.css'
 
-// function App() {
-  
-
-//   return (
-//     <>
-      
-//     </>
-//   )
-// }
-
-// export default App
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router';
-import HomePage from './pages/homepage';
+import HomePage from './pages/HomePage';
+import Events from './pages/Events';
+import GalleryPage from './pages/Gallery';
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        {/* Add more routes later */}
-      </Routes>
-    </Router>
-  );
-}
 
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <HomePage />,
+    },
+    {
+      path: '/events',
+      element: <Events />,
+    },
+    {
+      path: '/gallery',
+      element: <GalleryPage />,
+    },
+    // Add more routes later
+  ])
+
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  )
+}
 export default App;
+
 
