@@ -3,14 +3,24 @@ import { ApiDomain } from "../../utils/ApiDomain";
 
 export type TLoginResponse = {
   token: string;
-  user: {
+  user?: {
     user_id: number;
     firstname: string;
     lastname: string;
     email: string;
-    role: string;
+    role: 'user';
+  };
+  admin?: {
+    user_id: number;
+    firstname: string;
+    lastname: string;
+    email: string;
+    role: 'admin';
   };
 };
+
+
+
 
 type LoginInputs = {
   email: string;

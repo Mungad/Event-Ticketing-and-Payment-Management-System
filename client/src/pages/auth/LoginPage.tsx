@@ -18,19 +18,21 @@ const Login = () => {
 
     try {
       const result = await loginUser({ email, password }).unwrap();
+      console.log("Login successful:", result);
       dispatch(loginSuccess({ user: result.user, token: result.token }));
     } catch (err) {
       console.error("Login failed:", err);
     }
   };
 
+
   useEffect(() => {
     if (isSuccess && data) {
       // Optional: Navigate based on role
-      if (data.user.role === "admin") {
+      if (data.admin?.role === "admin") {
+        navigate("/admin/dashboard");
+      } else if (data.user?.role === "user") {
         navigate("/");
-      } else {
-        navigate("/customer/dashboard");
       }
     }
   }, [isSuccess, data, navigate]);

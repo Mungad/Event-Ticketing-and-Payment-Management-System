@@ -7,6 +7,7 @@ import GalleryPage from './pages/Gallery';
 import Login from './pages/auth/LoginPage';
 import Register from './pages/auth/RegisterPage';
 import VerifyUser from './pages/auth/VerifyUser';
+import AdminDashboard from './dashboard/adminDahboard/AdminDashboard';
 
 function App() {
 
@@ -34,7 +35,29 @@ function App() {
     {
       path: '/register/verify',
       element: <VerifyUser />,
-    }
+    },
+    {
+      path: 'admin/dashboard',
+      element: <AdminDashboard />,
+      children: [
+        {
+          path: 'cars',
+          element:<h1>Events</h1>
+        },
+        {
+          path: 'users',
+          element: <h1>Analytics</h1>
+        },
+        {
+          path: 'profile',
+          element: <h1>Analytics</h1>
+        },
+        {
+          path: 'analytics',
+          element: <h1>Analytics</h1>
+        },
+      ]
+    },
     // Add more routes later
   ])
 
