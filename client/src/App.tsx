@@ -41,20 +41,32 @@ function App() {
       element: <AdminDashboard />,
       children: [
         {
-          path: 'cars',
+          path: 'events',
           element:<h1>Events</h1>
         },
         {
           path: 'users',
-          element: <h1>Analytics</h1>
+          element: <h1>Users</h1>
+        },
+        {
+          path: 'venues',
+          element: <h1>Venues</h1>
+        },
+        {
+          path: 'ticket-orders',
+          element: <h1>Ticket Orders</h1>
+        },
+        {
+          path: 'payments',
+          element: <h1>Payments</h1>
+        },
+        {
+          path: 'support-tickets',
+          element: <h1>Support Tickets</h1>
         },
         {
           path: 'profile',
-          element: <h1>Analytics</h1>
-        },
-        {
-          path: 'analytics',
-          element: <h1>Analytics</h1>
+          element: <h1>Profile</h1>
         },
       ]
     },
