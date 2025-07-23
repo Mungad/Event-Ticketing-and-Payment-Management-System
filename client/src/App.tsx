@@ -12,6 +12,7 @@ import AdminDashboard from './dashboard/adminDahboard/AdminDashboard';
 import CategoryEventsPage from './components/events/CategoryEventsPage';
 import EventDetails from './components/events/EventDetails';
 import CartPage from './components/events/cart/CartPage';
+import Contact from './pages/Contact';
 
 
 
@@ -43,6 +44,10 @@ function App() {
     {
       path: '/gallery',
       element: <GalleryPage />,
+    },
+    {
+      path: '/contact',
+      element: <Contact />,
     },
     {
       path: '/login',
