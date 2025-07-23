@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar';
 import CategoryPage from '../components/events/CategoryPage';
 import Footer from '../components/Footer';
+//import EventList from "../dashboard/adminDashboard/events/EventList";
 
 const Events = () => {
   return (
@@ -8,6 +9,7 @@ const Events = () => {
       <Navbar />
       <CategoryPage />
       <Footer />
+      {/* <EventList /> */}
     </main>
   );
 };

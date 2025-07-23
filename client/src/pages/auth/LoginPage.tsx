@@ -38,17 +38,17 @@ const Login = () => {
   }, [isSuccess, data, navigate]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-6 text-amber-600">
-          Sign In to CarRentalPro
+        <h2 className="text-2xl font-bold text-center mb-6 text-orange-600">
+          Sign In to MyTicket
         </h2>
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="block mb-1 text-gray-700 font-medium">Email</label>
             <input
               type="email"
-              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 text-black"
+              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500 text-black"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -69,7 +69,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded transition"
+            className="w-full bg-orange-500 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded transition"
           >
             {isLoading ? "Signing in..." : "Sign In"}
           </button>
@@ -83,7 +83,7 @@ const Login = () => {
 
         <p className="mt-4 text-center text-sm text-gray-600">
           Don't have an account?{" "}
-          <a href="/register" className="text-amber-600 font-semibold hover:underline">
+          <a href="/register" className="text-orange-600 font-semibold hover:underline">
             Sign Up
           </a>
         </p>

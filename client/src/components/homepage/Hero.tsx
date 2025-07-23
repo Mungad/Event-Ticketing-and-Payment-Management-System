@@ -14,13 +14,13 @@ const Hero = () => {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-r from-orange-600 to-red-600 text-white flex flex-col justify-center items-center text-center px-4">
+    <div className="min-h-screen w-full max-w-screen bg-gradient-to-r from-orange-600 to-red-600 text-white flex flex-col justify-center items-center text-center px-4 overflow-x-hidden">
       <h2 className="text-4xl md:text-5xl font-bold mb-4">Make Your Dream Come True</h2>
       <p className="text-lg mb-8">Meet your favorite artists, sport teams and parties</p>
 
       <form
         onSubmit={handleSearch}
-        className="bg-white rounded-full flex items-center px-4 py-3 w-full max-w-xl"
+        className="bg-white rounded-full flex items-center px-4 py-3 w-full max-w-xl shadow-md"
       >
         <input
           type="text"

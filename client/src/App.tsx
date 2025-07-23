@@ -1,4 +1,5 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router'
+import { Toaster } from "sonner";
 import './App.css'
 
 import HomePage from './pages/HomePage';
@@ -8,9 +9,14 @@ import Login from './pages/auth/LoginPage';
 import Register from './pages/auth/RegisterPage';
 import VerifyUser from './pages/auth/VerifyUser';
 import AdminDashboard from './dashboard/adminDahboard/AdminDashboard';
+import CategoryEventsPage from './components/events/CategoryEventsPage';
+import EventDetails from './components/events/EventDetails';
+import CartPage from './components/events/cart/CartPage';
+
+
 
 function App() {
-
+  <Toaster position="top-right" />
   const router = createBrowserRouter([
     {
       path: '/',
@@ -20,6 +26,20 @@ function App() {
       path: '/events',
       element: <Events />,
     },
+    {
+      path: '/category/:categoryName',
+      element: <CategoryEventsPage />,
+    },
+    {
+      path: '/events/:id',
+      element: <EventDetails />,
+    },
+    {
+      path: '/cart',
+      element: <CartPage />,
+    },
+    
+
     {
       path: '/gallery',
       element: <GalleryPage />,
@@ -42,7 +62,7 @@ function App() {
       children: [
         {
           path: 'events',
-          element:<h1>Events</h1>
+          element: <h1>Events</h1>
         },
         {
           path: 'users',

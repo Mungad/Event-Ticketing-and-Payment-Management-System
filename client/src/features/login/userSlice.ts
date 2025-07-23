@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 export type UserState = {
     token: string | null;
     user: {
