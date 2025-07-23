@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import TopBar from '../TopBar';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 
@@ -37,6 +38,7 @@ const CategoryEventsPage = () => {
 
   return (
     <div className="bg-white min-h-screen flex flex-col">
+      <TopBar />
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-6 py-10 flex-1">

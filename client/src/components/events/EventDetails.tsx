@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../components/events/cart/cartSlice";
 import { toast } from "sonner";
 
+import TopBar from "../TopBar"; // ✅ ADD THIS
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
@@ -50,6 +51,7 @@ const EventDetails = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col">
+      <TopBar /> {/* ✅ TOPBAR */}
       <Navbar />
 
       <main className="flex-grow py-10">

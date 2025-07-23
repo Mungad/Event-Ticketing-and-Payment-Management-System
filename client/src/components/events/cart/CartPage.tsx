@@ -1,11 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../../app/store";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom"; // ✅ FIXED
 import { useEffect } from "react";
 import Navbar from "../../Navbar";
+import TopBar from "../../TopBar"; // ✅ ADDED TOPBAR
 import Footer from "../../Footer";
 import { removeFromCart } from "../cart/cartSlice";
-import { Link } from "react-router";
+import { Link } from "react-router-dom"; // ✅ FIXED
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const Cart = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <TopBar /> {/* ✅ ADDED HERE */}
       <Navbar />
 
       <main className="flex-1 bg-gray-100 py-10 px-4 md:px-10">
@@ -62,11 +64,11 @@ const Cart = () => {
 
             <div className="pt-6 flex justify-end">
               <Link
-                 to="/checkout"
-                 className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded text-center block w-fit"
-               >
-                 Proceed to Checkout
-               </Link>
+                to="/checkout"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded text-center block w-fit"
+              >
+                Proceed to Checkout
+              </Link>
             </div>
           </div>
         )}
