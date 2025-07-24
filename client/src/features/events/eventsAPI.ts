@@ -17,8 +17,9 @@ export const eventsAPI = createApi({
   }),
   tagTypes: ["Events"],
   endpoints: (builder) => ({
-    getEvents: builder.query<{ data: TEvent[] }, void>({
+    getEvents: builder.query< TEvent[] , void>({
       query: () => "/events",
+      
       providesTags: ["Events"],
     }),
     createEvent: builder.mutation<TEvent, Partial<TEvent>>({

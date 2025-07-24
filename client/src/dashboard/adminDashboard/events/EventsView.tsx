@@ -13,6 +13,8 @@ const ViewEvents = () => {
     refetchOnMountOrArgChange: true,
     pollingInterval: 60000,
   });
+  console.log("Events from API:", events);
+  console.log("Loading:", loading, "Error:", error);
 
   const [selectedEvent, setSelectedEvent] = useState<TEvent | null>(null);
   const [eventToDelete, setEventToDelete] = useState<TEvent | null>(null);
@@ -34,7 +36,7 @@ const ViewEvents = () => {
         <button
           data-test="create-event-button"
           className="btn bg-gray-600 text-white hover:bg-gray-700 border border-gray-400 rounded-lg px-4 py-2 text-lg"
-          onClick={() => (document.getElementById("my_modal_5") as HTMLDialogElement)?.showModal()}
+          onClick={() => (document.getElementById("create_modal") as HTMLDialogElement)?.showModal()}
         >
           Create Event
         </button>
@@ -51,9 +53,9 @@ const ViewEvents = () => {
       {loading && <p className="text-center text-lg"><Loader2 className="animate-spin inline mr-2" />Loading events...</p>}
       {error && <p className="text-red-500 text-center">Error fetching events</p>}
 
-      {events?.data && events.data.length > 0 ? (
+      {events && events.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {events.data.map((event: TEvent) => (
+          {events.map((event: TEvent) => (
             <div
               key={event.event_id}
               className="bg-white shadow-lg rounded-xl p-5 border border-gray-100 hover:shadow-xl transition duration-200 relative"
@@ -83,7 +85,7 @@ const ViewEvents = () => {
                   <CalendarDays className="inline-block mr-1 h-4 w-4 text-indigo-500" />
                   {new Date(event.date).toLocaleDateString()}
                 </p>
-                <p>Venue ID: {event.venueId}</p>
+                <p>Venue ID: {event.venue_id}</p>
                 <p>Category: <span className="capitalize">{event.category}</span></p>
                 <p>Tickets: {event.tickets_sold} / {event.tickets_total}</p>
                 <p>Price: KES {event.ticket_price}</p>

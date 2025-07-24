@@ -2,8 +2,9 @@ export type TEvent = {
   event_id: number;
   title: string;
   description: string;
-  venueId: number;
+  venue_id: number;
   date: string;
+  time: string;
   category: string;
   tickets_sold: number;
   tickets_total: number;

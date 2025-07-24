@@ -27,7 +27,7 @@ const DeleteEvent = ({ event }: DeleteEventProps) => {
   };
 
   return (
-    <dialog id="delete_event_modal" className="modal sm:modal-middle">
+    <dialog id="delete_modal" className="modal sm:modal-middle">
       <div className="modal-box bg-gray-800 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg">
         <h3 className="font-bold text-lg mb-4">Delete Event</h3>
         <p className="mb-6">
@@ -52,7 +52,7 @@ const DeleteEvent = ({ event }: DeleteEventProps) => {
             className="btn"
             type="button"
             onClick={() =>
-              (document.getElementById("delete_event_modal") as HTMLDialogElement)?.close()
+              (document.getElementById("delete_modal") as HTMLDialogElement)?.close()
             }
           >
             Cancel

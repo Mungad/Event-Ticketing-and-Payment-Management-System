@@ -43,7 +43,7 @@ const CreateEvent = () => {
   };
 
   return (
-    <dialog id="event_modal" className="modal sm:modal-middle">
+    <dialog id="create_modal" className="modal sm:modal-middle">
       <div className="modal-box bg-gray-600 text-white max-w-lg mx-auto rounded-lg">
         <h3 className="font-bold text-lg mb-4">Create New Event</h3>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -94,7 +94,7 @@ const CreateEvent = () => {
               type="button"
               className="btn"
               onClick={() => {
-                (document.getElementById('event_modal') as HTMLDialogElement)?.close();
+                (document.getElementById('create_modal') as HTMLDialogElement)?.close();
               }}
             >
               Close

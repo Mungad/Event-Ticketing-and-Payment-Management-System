@@ -45,7 +45,7 @@ const UpdateEvent = ({ event }: UpdateEventProps) => {
     if (event) {
       setValue("eventName", event.title);
       setValue("description", event.description);
-      setValue("location", event.venueId.toString());
+      setValue("location", event.venue_id.toString());
       setValue("date", event.date.slice(0, 10));
       //setValue("isActive", event.isActive);
     } else {
@@ -63,7 +63,7 @@ const UpdateEvent = ({ event }: UpdateEventProps) => {
       await updateEvent({ ...data, id: event.event_id }).unwrap();
       toast.success("Event updated successfully!");
       reset();
-      (document.getElementById("update_event_modal") as HTMLDialogElement)?.close();
+      (document.getElementById("update_modal") as HTMLDialogElement)?.close();
     } catch (error) {
       console.error("Error updating event:", error);
       toast.error("Failed to update event. Please try again.");
@@ -71,7 +71,7 @@ const UpdateEvent = ({ event }: UpdateEventProps) => {
   };
 
   return (
-    <dialog id="update_event_modal" className="modal sm:modal-middle">
+    <dialog id="update_modal" className="modal sm:modal-middle">
       <div className="modal-box bg-gray-700 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg">
         <h3 className="font-bold text-lg mb-4">Update Event</h3>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
