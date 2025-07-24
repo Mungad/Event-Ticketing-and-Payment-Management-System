@@ -14,6 +14,7 @@ import EventDetails from './components/events/EventDetails';
 import CartPage from './components/events/cart/CartPage';
 import Contact from './pages/Contact';
 import ViewEvents from './dashboard/adminDashboard/events/EventsView';
+import VenueViews from './dashboard/adminDashboard/venues/VenueView';
 
 
 function App() {
@@ -75,7 +76,7 @@ function App() {
         },
         {
           path: 'venues',
-          element: <h1>Venues</h1>
+          element: <VenueViews />
         },
         {
           path: 'ticket-orders',
