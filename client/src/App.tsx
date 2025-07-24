@@ -8,12 +8,12 @@ import GalleryPage from './pages/Gallery';
 import Login from './pages/auth/LoginPage';
 import Register from './pages/auth/RegisterPage';
 import VerifyUser from './pages/auth/VerifyUser';
-import AdminDashboard from './dashboard/adminDahboard/AdminDashboard';
+import AdminDashboard from './dashboard/adminDashboard/AdminDashboard';
 import CategoryEventsPage from './components/events/CategoryEventsPage';
 import EventDetails from './components/events/EventDetails';
 import CartPage from './components/events/cart/CartPage';
 import Contact from './pages/Contact';
-
+import ViewEvents from './dashboard/adminDashboard/events/EventsView';
 
 
 function App() {
@@ -67,7 +67,7 @@ function App() {
       children: [
         {
           path: 'events',
-          element: <h1>Events</h1>
+          element: <ViewEvents/>
         },
         {
           path: 'users',

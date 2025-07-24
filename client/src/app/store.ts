@@ -7,6 +7,7 @@ import { loginAPI } from '../features/login/loginAPI';
 import userSlice from '../features/login/userSlice';
 import eventsSlice from '../features/events/eventsSlice';
 import cartReducer from '../components/events/cart/cartSlice'; 
+import { eventsAPI } from '../features/events/eventsAPI';
 
 // Redux Persist config
 const persistConfig = {
@@ -20,6 +21,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   [usersAPI.reducerPath]: usersAPI.reducer,
   [loginAPI.reducerPath]: loginAPI.reducer,
+  [eventsAPI.reducerPath]: eventsAPI.reducer,
   user: userSlice,
   events: eventsSlice,
   cart: cartReducer, 
@@ -36,7 +38,8 @@ export const store = configureStore({
       serializableCheck: false,
     })
       .concat(usersAPI.middleware)
-      .concat(loginAPI.middleware),
+      .concat(loginAPI.middleware)
+      .concat(eventsAPI.middleware),
 });
 
 // Persistor for React-Persist Gate
