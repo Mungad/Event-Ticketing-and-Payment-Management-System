@@ -4,7 +4,7 @@ import type { RootState } from "../../app/store";
 
 
 export type TUser = {
-  customerID: number;
+  user_id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -89,17 +89,6 @@ export const usersAPI = createApi({
       invalidatesTags: ['Users']
     }),
 
-    // // GET /customer/bookings-payments/:id
-    // getCustomerBookingsAndPayments: builder.query<any, number>({
-    //   query: (id) => `/customer/bookings-payments/${id}`,
-    //   transformResponse: (response: { data: any[] }) => response.data,
-    // }),
-
-    // // GET /customers/bookings-payments
-    // getAllCustomerBookingsAndPayments: builder.query<any[], void>({
-    //   query: () => `/customers/bookings-payments`,
-    //   transformResponse: (response: { data: any[] }) => response.data,
-    // }),
   }),
 });
 
@@ -111,6 +100,4 @@ export const {
   useGetUserByIdQuery,
   useUpdateUserMutation,
   useDeleteUserMutation,
-//   useGetCustomerBookingsAndPaymentsQuery,
-//   useGetAllCustomerBookingsAndPaymentsQuery,
 } = usersAPI;
