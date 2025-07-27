@@ -79,28 +79,29 @@ const UpdateEvent = ({ event }: UpdateEventProps) => {
 
   return (
     <dialog id="update_modal" className="modal sm:modal-middle">
-      <div className="modal-box bg-gray-700 text-white max-w-lg mx-auto rounded-lg">
-        <h3 className="font-bold text-lg mb-4">Update Event</h3>
+      <div className="modal-box bg-white text-black max-w-lg mx-auto rounded-lg shadow-md border border-orange-300">
+        <h3 className="font-bold text-xl mb-4 text-orange-600 border-b pb-2 border-orange-200">
+          Update Event
+        </h3>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-
           {/* Title */}
           <div>
-            <label className="label text-sm">Event Title</label>
+            <label className="text-sm font-medium text-black">Event Title</label>
             <input
               {...register("title")}
               placeholder="Event Title"
-              className="input input-bordered w-full bg-white text-black"
+              className="input w-full bg-white text-black border border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
             {errors.title && <span className="text-sm text-red-500">{errors.title.message}</span>}
           </div>
 
           {/* Venue ID */}
           <div>
-            <label className="label text-sm">Venue ID</label>
+            <label className="text-sm font-medium text-black">Venue ID</label>
             <input
               {...register("venue_id")}
               placeholder="Venue ID"
-              className="input input-bordered w-full bg-white text-black"
+              className="input w-full bg-white text-black border border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
             {errors.venue_id && <span className="text-sm text-red-500">{errors.venue_id.message}</span>}
           </div>
@@ -108,20 +109,20 @@ const UpdateEvent = ({ event }: UpdateEventProps) => {
           {/* Date & Time */}
           <div className="flex gap-4">
             <div className="w-1/2">
-              <label className="label text-sm">Date</label>
+              <label className="text-sm font-medium text-black">Date</label>
               <input
                 type="date"
                 {...register("date")}
-                className="input input-bordered w-full bg-white text-black"
+                className="input w-full bg-white text-black border border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
               {errors.date && <span className="text-sm text-red-500">{errors.date.message}</span>}
             </div>
             <div className="w-1/2">
-              <label className="label text-sm">Time</label>
+              <label className="text-sm font-medium text-black">Time</label>
               <input
                 type="time"
                 {...register("time")}
-                className="input input-bordered w-full bg-white text-black"
+                className="input w-full bg-white text-black border border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
               {errors.time && <span className="text-sm text-red-500">{errors.time.message}</span>}
             </div>
@@ -129,11 +130,11 @@ const UpdateEvent = ({ event }: UpdateEventProps) => {
 
           {/* Category */}
           <div>
-            <label className="label text-sm">Category</label>
+            <label className="text-sm font-medium text-black">Category</label>
             <input
               {...register("category")}
               placeholder="Category"
-              className="input input-bordered w-full bg-white text-black"
+              className="input w-full bg-white text-black border border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
             {errors.category && <span className="text-sm text-red-500">{errors.category.message}</span>}
           </div>
@@ -141,22 +142,22 @@ const UpdateEvent = ({ event }: UpdateEventProps) => {
           {/* Tickets & Price */}
           <div className="flex gap-4">
             <div className="w-1/2">
-              <label className="label text-sm">Tickets Total</label>
+              <label className="text-sm font-medium text-black">Tickets Total</label>
               <input
                 type="number"
                 {...register("tickets_total")}
                 placeholder="Tickets Total"
-                className="input input-bordered w-full bg-white text-black"
+                className="input w-full bg-white text-black border border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
               {errors.tickets_total && <span className="text-sm text-red-500">{errors.tickets_total.message}</span>}
             </div>
             <div className="w-1/2">
-              <label className="label text-sm">Ticket Price (KES)</label>
+              <label className="text-sm font-medium text-black">Ticket Price (KES)</label>
               <input
                 type="number"
                 {...register("ticket_price")}
                 placeholder="Ticket Price"
-                className="input input-bordered w-full bg-white text-black"
+                className="input w-full bg-white text-black border border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
               {errors.ticket_price && <span className="text-sm text-red-500">{errors.ticket_price.message}</span>}
             </div>
@@ -164,23 +165,27 @@ const UpdateEvent = ({ event }: UpdateEventProps) => {
 
           {/* Description */}
           <div>
-            <label className="label text-sm">Description</label>
+            <label className="text-sm font-medium text-black">Description</label>
             <textarea
               {...register("description")}
               placeholder="Event Description"
-              className="textarea textarea-bordered w-full bg-white text-black"
+              className="textarea w-full bg-white text-black border border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
             {errors.description && <span className="text-sm text-red-500">{errors.description.message}</span>}
           </div>
 
           {/* Buttons */}
-          <div className="modal-action flex justify-end gap-2">
-            <button type="submit" className="btn btn-primary" disabled={isLoading}>
+          <div className="modal-action flex justify-end gap-2 mt-2">
+            <button
+              type="submit"
+              className="btn bg-orange-500 hover:bg-orange-600 text-white font-semibold"
+              disabled={isLoading}
+            >
               {isLoading ? "Updating..." : "Update"}
             </button>
             <button
               type="button"
-              className="btn"
+              className="btn border border-black text-black hover:bg-black hover:text-white"
               onClick={() => {
                 (document.getElementById("update_modal") as HTMLDialogElement)?.close();
                 reset();
