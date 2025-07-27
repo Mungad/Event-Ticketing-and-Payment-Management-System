@@ -1,6 +1,6 @@
 import { toast } from "sonner";
-import { eventsAPI, type TEvent } from "../../../features/events/eventsAPI";
-
+import { eventsAPI} from "../../../features/events/eventsAPI";
+import {  type TEvent } from "../../../features/events/types";
 type DeleteEventProps = {
   event: TEvent | null;
 };
@@ -11,49 +11,31 @@ const DeleteEvent = ({ event }: DeleteEventProps) => {
   });
 
   const handleDelete = async () => {
+    if (!event) return;
     try {
-      if (!event) {
-        toast.error("No event selected for deletion.");
-        return;
-      }
-
-      await deleteEvent(event.id);
-      toast.success("Event deleted successfully!");
-      (document.getElementById("delete_event_modal") as HTMLDialogElement)?.close();
+      await deleteEvent(event.event_id).unwrap();
+      toast.success("Event deleted!");
+      (document.getElementById("delete_modal") as HTMLDialogElement)?.close();
     } catch (error) {
-      console.error("Error deleting event:", error);
-      toast.error("Failed to delete event. Please try again.");
+      console.error("Delete error:", error);
+      toast.error("Failed to delete event.");
     }
   };
 
   return (
     <dialog id="delete_modal" className="modal sm:modal-middle">
-      <div className="modal-box bg-gray-800 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg">
+      <div className="modal-box bg-gray-800 text-white rounded-lg max-w-sm">
         <h3 className="font-bold text-lg mb-4">Delete Event</h3>
-        <p className="mb-6">
-          Are you sure you want to delete{" "}
-          <span className="font-semibold">{event?.eventName}</span>?
+        <p className="mb-4">
+          Are you sure you want to delete <span className="font-semibold">{event?.title}</span>?
         </p>
-        <div className="modal-action flex gap-4">
-          <button
-            className="btn btn-error"
-            onClick={handleDelete}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <>
-                <span className="loading loading-spinner text-primary" /> Deleting...
-              </>
-            ) : (
-              "Yes, Delete"
-            )}
+        <div className="modal-action">
+          <button className="btn btn-error" onClick={handleDelete} disabled={isLoading}>
+            {isLoading ? "Deleting..." : "Yes, Delete"}
           </button>
           <button
             className="btn"
-            type="button"
-            onClick={() =>
-              (document.getElementById("delete_modal") as HTMLDialogElement)?.close()
-            }
+            onClick={() => (document.getElementById("delete_modal") as HTMLDialogElement)?.close()}
           >
             Cancel
           </button>

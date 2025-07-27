@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as eventService from './event.service';
+import { TIEvent } from '../drizzle/schema';
 
 // GET all events
 export const getAllEvents = async (_req: Request, res: Response) => {
@@ -55,14 +56,38 @@ export const createEvent = async (req: Request, res: Response) => {
 export const updateEvent = async (req: Request, res: Response) => {
   try {
     const eventId = Number(req.params.id);
-    const updateData = {
-      ...req.body,
-      updated_at: new Date(),
-    };
+
+    if (isNaN(eventId)) {
+      return res.status(400).json({ error: 'Invalid event ID' });
+    }
+
+    const allowedFields = [
+      "title", "description", "venue_id", "category",
+      "date", "time", "ticket_price", "tickets_total", "tickets_sold"
+    ];
+
+    const updateData: Partial<TIEvent> = {};
+
+    // Sanitize body to only allow known fields
+    for (const key of allowedFields) {
+      if (req.body[key] !== undefined) {
+        (updateData as any)[key] = req.body[key];
+      }
+    }
+
+    // Enforce date object for date field
+    if (updateData.date && typeof updateData.date === "string") {
+      updateData.date = new Date(updateData.date);
+    }
+
+    // Add/update timestamp
+    updateData.updated_at = new Date();
+
+    console.log("Updating event with:", updateData);
 
     const updated = await eventService.update(eventId, updateData);
     if (!updated) {
-      return res.status(404).json({ error: 'Event not found' });
+      return res.status(404).json({ error: 'Event not found or update failed' });
     }
 
     res.status(200).json({
@@ -70,7 +95,8 @@ export const updateEvent = async (req: Request, res: Response) => {
       event: updated,
     });
   } catch (error: any) {
-    res.status(500).json({ error: error.message });
+    console.error("Update error:", error);
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 };
 

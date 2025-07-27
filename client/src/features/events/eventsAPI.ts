@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ApiDomain } from "../../utils/ApiDomain";
 import type { RootState } from "../../app/store";
-import type { TEvent } from "./types"; 
-
+import type { TEvent } from "./types";
 
 export const eventsAPI = createApi({
   reducerPath: "eventsAPI",
@@ -17,14 +16,13 @@ export const eventsAPI = createApi({
   }),
   tagTypes: ["Events"],
   endpoints: (builder) => ({
-    getEvents: builder.query< TEvent[] , void>({
+    getEvents: builder.query<TEvent[], void>({
       query: () => "/events",
-      
       providesTags: ["Events"],
     }),
     createEvent: builder.mutation<TEvent, Partial<TEvent>>({
       query: (newEvent) => ({
-        url: "/event",
+        url: "/events",
         method: "POST",
         body: newEvent,
       }),
@@ -32,7 +30,7 @@ export const eventsAPI = createApi({
     }),
     updateEvent: builder.mutation<TEvent, Partial<TEvent> & { id: number }>({
       query: ({ id, ...rest }) => ({
-        url: `/event/${id}`,
+        url: `/events/${id}`,
         method: "PUT",
         body: rest,
       }),
@@ -40,7 +38,7 @@ export const eventsAPI = createApi({
     }),
     deleteEvent: builder.mutation<{ success: boolean; id: number }, number>({
       query: (id) => ({
-        url: `/event/${id}`,
+        url: `/events/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Events"],

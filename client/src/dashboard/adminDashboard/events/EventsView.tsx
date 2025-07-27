@@ -1,3 +1,5 @@
+// src/dashboard/adminDashboard/events/ViewEvents.tsx
+
 import { useState } from "react";
 import { Loader2, CalendarDays } from "lucide-react";
 import { FaEdit } from "react-icons/fa";
@@ -13,8 +15,6 @@ const ViewEvents = () => {
     refetchOnMountOrArgChange: true,
     pollingInterval: 60000,
   });
-  console.log("Events from API:", events);
-  console.log("Loading:", loading, "Error:", error);
 
   const [selectedEvent, setSelectedEvent] = useState<TEvent | null>(null);
   const [eventToDelete, setEventToDelete] = useState<TEvent | null>(null);
@@ -31,10 +31,8 @@ const ViewEvents = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-8 sm:px-6 lg:px-12">
-      {/* Create Event Button */}
       <div className="flex justify-center mb-3 mt-3">
         <button
-          data-test="create-event-button"
           className="btn bg-gray-600 text-white hover:bg-gray-700 border border-gray-400 rounded-lg px-4 py-2 text-lg"
           onClick={() => (document.getElementById("create_modal") as HTMLDialogElement)?.showModal()}
         >
@@ -49,7 +47,6 @@ const ViewEvents = () => {
       <UpdateEvent event={selectedEvent} />
       <DeleteEvent event={eventToDelete} />
 
-      {/* Display Events */}
       {loading && <p className="text-center text-lg"><Loader2 className="animate-spin inline mr-2" />Loading events...</p>}
       {error && <p className="text-red-500 text-center">Error fetching events</p>}
 
@@ -60,7 +57,6 @@ const ViewEvents = () => {
               key={event.event_id}
               className="bg-white shadow-lg rounded-xl p-5 border border-gray-100 hover:shadow-xl transition duration-200 relative"
             >
-              {/* Actions */}
               <div className="absolute top-2 right-2 flex space-x-2">
                 <button
                   className="text-blue-600 hover:text-blue-800"
@@ -94,7 +90,7 @@ const ViewEvents = () => {
           ))}
         </div>
       ) : (
-        <p className="text-center text-gray-600 mt-6">No events found.</p>
+        !loading && <p className="text-center text-gray-600 mt-6">No events found.</p>
       )}
     </div>
   );

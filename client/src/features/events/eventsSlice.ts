@@ -1,14 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-
-export type TEvent = {
-  id: number;
-  eventName: string;
-  description: string;
-  date: string;
-  venue: string;
-  price: number;
-};
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { TEvent } from '../../features/events/types';
 
 export interface EventsState {
   allEvents: TEvent[];
@@ -33,13 +24,13 @@ const eventsSlice = createSlice({
       state.allEvents.push(action.payload);
     },
     updateEvent: (state, action: PayloadAction<TEvent>) => {
-      const index = state.allEvents.findIndex(e => e.id === action.payload.id);
+      const index = state.allEvents.findIndex(e => e.event_id === action.payload.event_id);
       if (index !== -1) {
         state.allEvents[index] = action.payload;
       }
     },
     deleteEvent: (state, action: PayloadAction<number>) => {
-      state.allEvents = state.allEvents.filter(e => e.id !== action.payload);
+      state.allEvents = state.allEvents.filter(e => e.event_id !== action.payload);
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;

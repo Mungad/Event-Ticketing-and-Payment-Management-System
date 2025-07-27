@@ -57,23 +57,27 @@ export const EventsTable = pgTable("events", {
   updated_at: timestamp("updated_at").defaultNow(),
 });
 
-// Ticket Orders Table (Bookings)
+// TicketOrdersTable (bookings)
 export const TicketOrdersTable = pgTable("ticket_orders", {
   order_id: serial("order_id").primaryKey(),
   user_id: integer("user_id").notNull().references(() => UsersTable.user_id),
-  event_id: integer("event_id").notNull().references(() => EventsTable.event_id),
+  event_id: integer("event_id")
+    .notNull()
+    .references(() => EventsTable.event_id, { onDelete: "cascade" }), // ✅
   quantity: integer("quantity").notNull(),
   total_price: decimal("total_price", { precision: 10, scale: 2 }).notNull(),
   payment_status: PaymentStatusEnum("payment_status").default("Pending"),
   order_date: timestamp("order_date").defaultNow(),
 });
 
-// Payments Table
+// PaymentsTable
 export const PaymentsTable = pgTable("payments", {
   payment_id: serial("payment_id").primaryKey(),
-  order_id: integer("order_id").references(() => TicketOrdersTable.order_id),
+  order_id: integer("order_id")
+    .references(() => TicketOrdersTable.order_id, { onDelete: "cascade" }), // ✅
   user_id: integer("user_id").references(() => UsersTable.user_id),
-  event_id: integer("event_id").references(() => EventsTable.event_id),
+  event_id: integer("event_id")
+    .references(() => EventsTable.event_id, { onDelete: "cascade" }), // ✅
   amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
   payment_status: PaymentStatusEnum("payment_status").default("Pending"),
   payment_date: timestamp("payment_date").defaultNow(),
@@ -82,6 +86,7 @@ export const PaymentsTable = pgTable("payments", {
   created_at: timestamp("created_at").defaultNow(),
   updated_at: timestamp("updated_at").defaultNow(),
 });
+
 
 // Support Tickets Table
 export const SupportTicketsTable = pgTable("support_tickets", {

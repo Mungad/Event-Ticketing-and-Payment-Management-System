@@ -11,25 +11,29 @@ type UpdateEventProps = {
 };
 
 type UpdateEventInputs = {
-  eventName: string;
+  title: string;
   description: string;
-  location: string;
+  venue_id: string;
   date: string;
-  isActive: boolean;
+  time: string;
+  category: string;
+  ticket_price: number;
+  tickets_total: number;
 };
 
 const schema = yup.object({
-  eventName: yup.string().max(75, "Max 75 characters").required("Event name is required"),
-  description: yup.string().max(255, "Max 255 characters").required("Description is required"),
-  location: yup.string().required("Location is required"),
+  title: yup.string().max(100).required("Title is required"),
+  description: yup.string().max(500).required("Description is required"),
+  venue_id: yup.string().required("Venue ID is required"),
   date: yup.string().required("Date is required"),
-  isActive: yup.boolean().default(true),
+  time: yup.string().required("Time is required"),
+  category: yup.string().required("Category is required"),
+  tickets_total: yup.number().required("Total tickets required"),
+  ticket_price: yup.number().required("Ticket price is required"),
 });
 
 const UpdateEvent = ({ event }: UpdateEventProps) => {
-  const [updateEvent, { isLoading }] = eventsAPI.useUpdateEventMutation({
-    fixedCacheKey: "updateEvent",
-  });
+  const [updateEvent, { isLoading }] = eventsAPI.useUpdateEventMutation({ fixedCacheKey: "updateEvent" });
 
   const {
     register,
@@ -43,109 +47,142 @@ const UpdateEvent = ({ event }: UpdateEventProps) => {
 
   useEffect(() => {
     if (event) {
-      setValue("eventName", event.title);
+      setValue("title", event.title);
       setValue("description", event.description);
-      setValue("location", event.venue_id.toString());
+      setValue("venue_id", String(event.venue_id));
       setValue("date", event.date.slice(0, 10));
-      //setValue("isActive", event.isActive);
+      setValue("time", event.time);
+      setValue("category", event.category);
+      setValue("ticket_price", event.ticket_price);
+      setValue("tickets_total", event.tickets_total);
     } else {
       reset();
     }
   }, [event, setValue, reset]);
 
   const onSubmit: SubmitHandler<UpdateEventInputs> = async (data) => {
+    if (!event) return;
     try {
-      if (!event) {
-        toast.error("No event selected for update.");
-        return;
-      }
-
-      await updateEvent({ ...data, id: event.event_id }).unwrap();
-      toast.success("Event updated successfully!");
+      await updateEvent({
+        id: event.event_id,
+        ...data,
+        venue_id: Number(data.venue_id),
+      }).unwrap();
+      toast.success("Event updated!");
       reset();
       (document.getElementById("update_modal") as HTMLDialogElement)?.close();
     } catch (error) {
-      console.error("Error updating event:", error);
-      toast.error("Failed to update event. Please try again.");
+      console.error("Update error:", error);
+      toast.error("Failed to update event.");
     }
   };
 
   return (
     <dialog id="update_modal" className="modal sm:modal-middle">
-      <div className="modal-box bg-gray-700 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg">
+      <div className="modal-box bg-gray-700 text-white max-w-lg mx-auto rounded-lg">
         <h3 className="font-bold text-lg mb-4">Update Event</h3>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          <input
-            type="text"
-            {...register("eventName")}
-            placeholder="Event Name"
-            className="input rounded w-full p-2 bg-white text-gray-800"
-          />
-          {errors.eventName && <span className="text-sm text-red-500">{errors.eventName.message}</span>}
 
-          <textarea
-            {...register("description")}
-            placeholder="Description"
-            className="textarea textarea-bordered w-full p-2 bg-white text-gray-800"
-          />
-          {errors.description && <span className="text-sm text-red-500">{errors.description.message}</span>}
-
-          <input
-            type="text"
-            {...register("location")}
-            placeholder="Location"
-            className="input rounded w-full p-2 bg-white text-gray-800"
-          />
-          {errors.location && <span className="text-sm text-red-500">{errors.location.message}</span>}
-
-          <input
-            type="date"
-            {...register("date")}
-            className="input rounded w-full p-2 bg-white text-gray-800"
-          />
-          {errors.date && <span className="text-sm text-red-500">{errors.date.message}</span>}
-
-          <div className="form-control">
-            <label className="label cursor-pointer">
-              <span className="label-text text-white">Status</span>
-              <div className="flex gap-4">
-                <label className="flex items-center gap-1">
-                  <input
-                    type="radio"
-                    value="true"
-                    {...register("isActive")}
-                    className="radio radio-primary"
-                  />
-                  Active
-                </label>
-                <label className="flex items-center gap-1">
-                  <input
-                    type="radio"
-                    value="false"
-                    {...register("isActive")}
-                    className="radio radio-warning"
-                  />
-                  Inactive
-                </label>
-              </div>
-            </label>
+          {/* Title */}
+          <div>
+            <label className="label text-sm">Event Title</label>
+            <input
+              {...register("title")}
+              placeholder="Event Title"
+              className="input input-bordered w-full bg-white text-black"
+            />
+            {errors.title && <span className="text-sm text-red-500">{errors.title.message}</span>}
           </div>
 
-          <div className="modal-action">
+          {/* Venue ID */}
+          <div>
+            <label className="label text-sm">Venue ID</label>
+            <input
+              {...register("venue_id")}
+              placeholder="Venue ID"
+              className="input input-bordered w-full bg-white text-black"
+            />
+            {errors.venue_id && <span className="text-sm text-red-500">{errors.venue_id.message}</span>}
+          </div>
+
+          {/* Date & Time */}
+          <div className="flex gap-4">
+            <div className="w-1/2">
+              <label className="label text-sm">Date</label>
+              <input
+                type="date"
+                {...register("date")}
+                className="input input-bordered w-full bg-white text-black"
+              />
+              {errors.date && <span className="text-sm text-red-500">{errors.date.message}</span>}
+            </div>
+            <div className="w-1/2">
+              <label className="label text-sm">Time</label>
+              <input
+                type="time"
+                {...register("time")}
+                className="input input-bordered w-full bg-white text-black"
+              />
+              {errors.time && <span className="text-sm text-red-500">{errors.time.message}</span>}
+            </div>
+          </div>
+
+          {/* Category */}
+          <div>
+            <label className="label text-sm">Category</label>
+            <input
+              {...register("category")}
+              placeholder="Category"
+              className="input input-bordered w-full bg-white text-black"
+            />
+            {errors.category && <span className="text-sm text-red-500">{errors.category.message}</span>}
+          </div>
+
+          {/* Tickets & Price */}
+          <div className="flex gap-4">
+            <div className="w-1/2">
+              <label className="label text-sm">Tickets Total</label>
+              <input
+                type="number"
+                {...register("tickets_total")}
+                placeholder="Tickets Total"
+                className="input input-bordered w-full bg-white text-black"
+              />
+              {errors.tickets_total && <span className="text-sm text-red-500">{errors.tickets_total.message}</span>}
+            </div>
+            <div className="w-1/2">
+              <label className="label text-sm">Ticket Price (KES)</label>
+              <input
+                type="number"
+                {...register("ticket_price")}
+                placeholder="Ticket Price"
+                className="input input-bordered w-full bg-white text-black"
+              />
+              {errors.ticket_price && <span className="text-sm text-red-500">{errors.ticket_price.message}</span>}
+            </div>
+          </div>
+
+          {/* Description */}
+          <div>
+            <label className="label text-sm">Description</label>
+            <textarea
+              {...register("description")}
+              placeholder="Event Description"
+              className="textarea textarea-bordered w-full bg-white text-black"
+            />
+            {errors.description && <span className="text-sm text-red-500">{errors.description.message}</span>}
+          </div>
+
+          {/* Buttons */}
+          <div className="modal-action flex justify-end gap-2">
             <button type="submit" className="btn btn-primary" disabled={isLoading}>
-              {isLoading ? (
-                <>
-                  <span className="loading loading-spinner text-primary" /> Updating...
-                </>
-              ) : (
-                "Update"
-              )}
+              {isLoading ? "Updating..." : "Update"}
             </button>
             <button
               type="button"
               className="btn"
               onClick={() => {
-                (document.getElementById("update_event_modal") as HTMLDialogElement)?.close();
+                (document.getElementById("update_modal") as HTMLDialogElement)?.close();
                 reset();
               }}
             >
