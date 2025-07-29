@@ -12,7 +12,7 @@ import { adminOnly, authenticated } from "../middleware/bearAuth";
 const supportTicketRoutes = (app: Express) => {
   // Get all support tickets
   app.get('/support-tickets', 
-    adminOnly,
+    //adminOnly,
     async (req, res, next) => {
     try {
       await getAllSupportTickets(req, res);
@@ -23,7 +23,7 @@ const supportTicketRoutes = (app: Express) => {
 
   // Get ticket by ID
   app.get('/support-tickets/:id',
-    authenticated,
+    //authenticated,
      async (req, res, next) => {
     try {
       await getSupportTicketById(req, res);
@@ -34,7 +34,7 @@ const supportTicketRoutes = (app: Express) => {
 
   // Create ticket(users)
   app.post('/support-tickets',
-    authenticated,
+    //authenticated,
      async (req, res, next) => {
     try {
       await createSupportTicket(req, res);

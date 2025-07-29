@@ -15,8 +15,9 @@ import CartPage from './components/events/cart/CartPage';
 import Contact from './pages/Contact';
 import ViewEvents from './dashboard/adminDashboard/events/EventsView';
 import VenueViews from './dashboard/adminDashboard/venues/VenueView';
-//import UserView from './dashboard/adminDashboard/user/UserView';
-
+import MyProfile from './pages/MyProfile';
+import UserView from './dashboard/adminDashboard/user/UserView';
+import SupportTicketsView from './dashboard/adminDashboard/supportTickets/SupportTicketsView';
 
 function App() {
   <Toaster position="top-right" />
@@ -64,6 +65,10 @@ function App() {
       element: <VerifyUser />,
     },
     {
+      path: '/profile',
+      element: <MyProfile />,
+    },
+    {
       path: 'admin/dashboard',
       element: <AdminDashboard />,
       children: [
@@ -71,10 +76,10 @@ function App() {
           path: 'events',
           element: <ViewEvents/>
         },
-        // {
-        //   path: 'users',
-        //   element: <UserView />
-        // },
+        {
+          path: 'users',
+          element: <UserView />
+        },
         {
           path: 'venues',
           element: <VenueViews />
@@ -84,16 +89,8 @@ function App() {
           element: <h1>Ticket Orders</h1>
         },
         {
-          path: 'payments',
-          element: <h1>Payments</h1>
-        },
-        {
           path: 'support-tickets',
-          element: <h1>Support Tickets</h1>
-        },
-        {
-          path: 'profile',
-          element: <h1>Profile</h1>
+          element: <SupportTicketsView/>
         },
       ]
     },
