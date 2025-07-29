@@ -19,6 +19,7 @@ type UpdateEventInputs = {
   category: string;
   ticket_price: number;
   tickets_total: number;
+  img_url: string;
 };
 
 const schema = yup.object({
@@ -30,6 +31,7 @@ const schema = yup.object({
   category: yup.string().required("Category is required"),
   tickets_total: yup.number().required("Total tickets required"),
   ticket_price: yup.number().required("Ticket price is required"),
+  img_url: yup.string().url("Must be a valid URL").required("Image URL is required"),
 });
 
 const UpdateEvent = ({ event }: UpdateEventProps) => {
@@ -90,6 +92,16 @@ const UpdateEvent = ({ event }: UpdateEventProps) => {
             <input
               {...register("title")}
               placeholder="Event Title"
+              className="input w-full bg-white text-black border border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            />
+            {errors.title && <span className="text-sm text-red-500">{errors.title.message}</span>}
+          </div>
+
+          <div>
+            <label className="text-sm font-medium text-black">Event Poster</label>
+            <input
+              {...register("img_url")}
+              placeholder="Event Poster URL"
               className="input w-full bg-white text-black border border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
             {errors.title && <span className="text-sm text-red-500">{errors.title.message}</span>}

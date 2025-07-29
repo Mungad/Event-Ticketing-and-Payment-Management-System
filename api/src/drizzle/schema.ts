@@ -45,6 +45,7 @@ export const VenuesTable = pgTable("venues", {
 export const EventsTable = pgTable("events", {
   event_id: serial("event_id").primaryKey(),
   title: varchar("title", { length: 100 }),
+  img_url: varchar("img_url", { length: 255 }),
   description: text("description"),
   venue_id: integer("venue_id").references(() => VenuesTable.venue_id),
   category: varchar("category", { length: 50 }),

@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../components/events/cart/cartSlice";
 import { toast } from "sonner";
 
-import TopBar from "../TopBar"; // ✅ ADD THIS
+import TopBar from "../TopBar"; 
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
@@ -57,7 +57,7 @@ const EventDetails = () => {
       <main className="flex-grow py-10">
         <div className="bg-white p-6 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto rounded-xl shadow">
           <img
-            src={`/images/events/${event.event_id}.jpg`}
+            src={event.img_url}
             alt={event.title}
             className="w-full h-auto rounded-xl shadow-md"
           />

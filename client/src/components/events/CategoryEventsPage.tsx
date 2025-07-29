@@ -10,12 +10,14 @@ type Event = {
   title: string;
   ticket_price: number;
   category: string;
+  img_url: string;
 };
 
 const CategoryEventsPage = () => {
   const { categoryName } = useParams();
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
+  console.log(events)
 
   useEffect(() => {
     const fetchEventsByCategory = async () => {
@@ -56,7 +58,7 @@ const CategoryEventsPage = () => {
                 className="shadow-md border rounded-md overflow-hidden flex flex-col"
               >
                 <img
-                  src={`/images/events/${event.event_id}.jpg`}
+                  src={event.img_url || '/default-event-image.jpg'}
                   alt={event.title}
                   className="h-40 object-cover w-full"
                 />

@@ -21,9 +21,8 @@ const Navbar = () => {
 
         {/* Center Links */}
         <ul className="hidden md:flex gap-6 uppercase font-medium mx-auto">
-          <li><Link to="/upcoming" className="hover:text-orange-400">Upcoming</Link></li>
+          <li><Link to="/about" className="hover:text-orange-400">About</Link></li>
           <li><Link to="/events" className="hover:text-orange-400">Events</Link></li>
-          <li><Link to="/search" className="hover:text-orange-400">Search</Link></li>
           <li><Link to="/gallery" className="hover:text-orange-400">Gallery</Link></li>
           <li><Link to="/contact" className="hover:text-orange-400">Contact</Link></li>
         </ul>
@@ -54,9 +53,8 @@ const Navbar = () => {
       {menuOpen && (
         <div className="md:hidden bg-black text-white px-6 py-4 space-y-3">
           <ul className="flex flex-col gap-2 text-sm uppercase font-medium">
-            <li><Link to="/upcoming" className="hover:text-orange-400">Upcoming</Link></li>
+            <li><Link to="/about" className="hover:text-orange-400">About</Link></li>
             <li><Link to="/events" className="hover:text-orange-400">Events</Link></li>
-            <li><Link to="/search" className="hover:text-orange-400">Search</Link></li>
             <li><Link to="/gallery" className="hover:text-orange-400">Gallery</Link></li>
             <li><Link to="/contact" className="hover:text-orange-400">Contact</Link></li>
           </ul>

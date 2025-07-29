@@ -11,5 +11,5 @@ export type TEvent = {
   ticket_price: number;
   createdAt: string;
   updatedAt?: string;
-  
+  img_url: string;
 };

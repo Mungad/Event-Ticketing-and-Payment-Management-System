@@ -1,31 +1,37 @@
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../../app/store";
-import { useNavigate } from "react-router-dom"; // ✅ FIXED
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "../../Navbar";
-import TopBar from "../../TopBar"; // ✅ ADDED TOPBAR
+import TopBar from "../../TopBar";
 import Footer from "../../Footer";
 import { removeFromCart } from "../cart/cartSlice";
-import { Link } from "react-router-dom"; // ✅ FIXED
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const user = useSelector((state: RootState) => state.user);
+  const userState = useSelector((state: RootState) => state.user);
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
   useEffect(() => {
-    if (!user) {
+    if (!userState?.user) {
       navigate("/login");
     }
-  }, [user, navigate]);
+  }, [userState, navigate]);
 
-  if (!user) return null;
+  if (!userState?.user) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <p className="text-gray-600 text-lg">Redirecting to login...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
-      <TopBar /> {/* ✅ ADDED HERE */}
+      <TopBar />
       <Navbar />
 
       <main className="flex-1 bg-gray-100 py-10 px-4 md:px-10">

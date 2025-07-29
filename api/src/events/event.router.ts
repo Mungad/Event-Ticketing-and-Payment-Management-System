@@ -30,7 +30,7 @@ const eventRoutes = (app: Express) => {
 
   // Create new event(Admin only)
   app.post('/events',
-    adminOnly,
+    //adminOnly,
      async (req, res, next) => {
     try {
       await createEvent(req, res);
