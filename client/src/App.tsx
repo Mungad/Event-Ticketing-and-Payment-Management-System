@@ -20,6 +20,7 @@ import UserView from './dashboard/adminDashboard/user/UserView';
 import SupportTicketsView from './dashboard/adminDashboard/supportTickets/SupportTicketsView';
 import Checkout from './components/events/cart/checkout/Checkout';
 import About from './pages/About';
+import TicketOrdersView from './dashboard/adminDashboard/ticketorder/TicketOrderView';
 
 function App() {
   <Toaster position="top-right" />
@@ -95,7 +96,7 @@ function App() {
         },
         {
           path: 'ticket-orders',
-          element: <h1>Ticket Orders</h1>
+          element: <TicketOrdersView />
         },
         {
           path: 'support-tickets',
