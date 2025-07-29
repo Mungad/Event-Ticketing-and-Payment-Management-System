@@ -3,7 +3,9 @@ import { supportAPI } from "../../../features/support/supportAPI";
 import type { TSupportTicket } from "../../../features/support/types";
 
 const SupportTicketsView = () => {
-  const { data: tickets, isLoading: loading, error } = supportAPI.useGetAllTicketsQuery(undefined, {
+  const { data: tickets, isLoading: loading
+    //, error
+ } = supportAPI.useGetAllTicketsQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 60000,
   });
