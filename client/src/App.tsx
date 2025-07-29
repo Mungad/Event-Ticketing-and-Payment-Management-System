@@ -18,6 +18,7 @@ import VenueViews from './dashboard/adminDashboard/venues/VenueView';
 import MyProfile from './pages/MyProfile';
 import UserView from './dashboard/adminDashboard/user/UserView';
 import SupportTicketsView from './dashboard/adminDashboard/supportTickets/SupportTicketsView';
+import Checkout from './components/events/cart/checkout/Checkout';
 
 function App() {
   <Toaster position="top-right" />
@@ -42,7 +43,10 @@ function App() {
       path: '/cart',
       element: <CartPage />,
     },
-    
+    {
+      path: '/checkout',
+      element: <Checkout />,
+    },
 
     {
       path: '/gallery',
