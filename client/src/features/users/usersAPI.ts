@@ -12,6 +12,7 @@ export type TUser = {
   role: string;
   isVerified: boolean;
   image_url: string;
+  verificationCode?: string;
 };
 
 export const usersAPI = createApi({
@@ -60,7 +61,6 @@ export const usersAPI = createApi({
     // GET all users
     getUsers: builder.query<TUser[], void>({
       query: () => '/users',
-      transformResponse: (response: { data: TUser[] }) => response.data,
       providesTags: ['Users']
     }),
     

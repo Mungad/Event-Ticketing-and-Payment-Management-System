@@ -23,10 +23,10 @@ const Register = () => {
       try {
         await createUser({
           firstName: form.name,
-          lastName: "User",
+          lastName: form.name,
           email: form.email,
           password: form.password,
-          role: "customer",
+          role: "user",
         }).unwrap();
       } catch (err) {
         console.error("Registration failed:", err);
@@ -45,7 +45,7 @@ const Register = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center mb-6 text-amber-600">
+        <h2 className="text-2xl font-bold text-center mb-6 text-orange-600">
           Create Your Account
         </h2>
         <form onSubmit={handleRegister} className="space-y-4">
@@ -66,7 +66,7 @@ const Register = () => {
             <input
               type="email"
               name="email"
-              className="w-full border border-gray-300 text-gray-700 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full border border-gray-300 text-gray-700 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
               value={form.email}
               onChange={handleChange}
               required
@@ -78,7 +78,7 @@ const Register = () => {
             <input
               type="password"
               name="password"
-              className="w-full border border-gray-300 text-gray-700 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="w-full border border-gray-300 text-gray-700 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
               value={form.password}
               onChange={handleChange}
               required
@@ -88,7 +88,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded transition"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded transition"
           >
             {isLoading ? "Signing up..." : "Sign Up"}
           </button>
@@ -102,7 +102,7 @@ const Register = () => {
 
         <p className="mt-4 text-center text-sm text-gray-600">
           Already have an account?{" "}
-          <a href="/login" className="text-amber-600 font-semibold hover:underline">
+          <a href="/login" className="text-orange-600 font-semibold hover:underline">
             Sign In
           </a>
         </p>

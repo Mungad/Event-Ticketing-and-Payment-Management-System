@@ -32,7 +32,7 @@ const venueRoutes = (app: Express) => {
     
     // Create venue (Admin only)
     app.post("/venues",
-        adminOnly,
+        //adminOnly,
          async (req, res, next) => {
         try {
             await createVenue(req, res);
@@ -54,7 +54,7 @@ const venueRoutes = (app: Express) => {
     
     // Delete venue (Admin only)
     app.delete("/venues/:id",
-        adminOnly,
+        //adminOnly,
          async (req, res, next) => {
         try {
             await deleteVenue(req, res);

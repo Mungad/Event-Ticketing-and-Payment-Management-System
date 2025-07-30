@@ -1,5 +1,6 @@
 import { toast } from "sonner";
-import { usersAPI, type TUser } from "../../../features/users/usersAPI";
+import { usersAPI } from "../../../features/users/usersAPI";
+import type { TUser } from "../../../features/users/types";
 
 type DeleteUserProps = {
   user: TUser | null;
@@ -11,51 +12,37 @@ const DeleteUser = ({ user }: DeleteUserProps) => {
   });
 
   const handleDelete = async () => {
+    if (!user) return;
     try {
-      if (!user) {
-        toast.error("No user selected for deletion.");
-        return;
-      }
-
-      await deleteUser(user.user_id);
-      toast.success("User deleted successfully!");
-      (document.getElementById("delete_modal") as HTMLDialogElement)?.close();
+      await deleteUser(user.user_id).unwrap();
+      toast.success("User deleted!");
+      (document.getElementById("delete_user_modal") as HTMLDialogElement)?.close();
     } catch (error) {
-      console.error("Error deleting user:", error);
-      toast.error("Failed to delete user. Please try again.");
+      console.error("Delete error:", error);
+      toast.error("Failed to delete user.");
     }
   };
 
   return (
-    <dialog id="delete_modal" className="modal sm:modal-middle">
-      <div className="modal-box bg-gray-800 text-white w-full max-w-xs sm:max-w-lg mx-auto rounded-lg">
-        <h3 className="font-bold text-lg mb-4">Delete User</h3>
-        <p className="mb-6">
+    <dialog id="delete_user_modal" className="modal sm:modal-middle">
+      <div className="modal-box bg-white text-black rounded-xl shadow-xl max-w-sm">
+        <h3 className="font-bold text-lg mb-4 text-orange-600">Delete User</h3>
+        <p className="mb-4">
           Are you sure you want to delete{" "}
-          <span className="font-semibold">
-            {user?.firstName} {user?.lastName}
-          </span>
-          ?
+          <span className="font-semibold text-orange-700">{user?.firstname} {user?.lastname}</span>?
         </p>
-        <div className="modal-action flex gap-4">
+        <div className="modal-action">
           <button
-            className="btn btn-error"
+            className="btn bg-orange-600 text-white hover:bg-orange-700"
             onClick={handleDelete}
             disabled={isLoading}
           >
-            {isLoading ? (
-              <>
-                <span className="loading loading-spinner text-primary" /> Deleting...
-              </>
-            ) : (
-              "Yes, Delete"
-            )}
+            {isLoading ? "Deleting..." : "Yes, Delete"}
           </button>
           <button
-            className="btn"
-            type="button"
+            className="btn border border-orange-600 text-orange-600 hover:bg-orange-50"
             onClick={() =>
-              (document.getElementById("delete_modal") as HTMLDialogElement)?.close()
+              (document.getElementById("delete_user_modal") as HTMLDialogElement)?.close()
             }
           >
             Cancel

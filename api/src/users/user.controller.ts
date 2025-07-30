@@ -88,9 +88,9 @@ export const createUser = async (req: Request, res: Response) => {
 // Verify email with code
 export const verifyEmail = async (req: Request, res: Response) => {
     try {
-        const { email, verificationCode } = req.body;
+        const { email, code } = req.body;
 
-        if (!email || !verificationCode) {
+        if (!email || !code) {
             return res.status(400).json({ error: "Email and verification code are required" });
         }
 
@@ -103,7 +103,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
             return res.status(400).json({ error: "Email already verified" });
         }
 
-        if (user.verification_code !== verificationCode) {
+        if (user.verification_code !== code) {
             return res.status(400).json({ error: "Invalid verification code" });
         }
 

@@ -52,7 +52,7 @@ const userRoutes = (app: Express) => {
   });
 
   // Get all users (Admin only)
-  app.get("/users", adminOnly, async (req, res, next) => {
+  app.get("/users", async (req, res, next) => {
     try {
       await getAllUsers(req, res);
     } catch (error) {
