@@ -62,6 +62,9 @@ const AdminDashboard = () => {
 
                 {/* Main content */}
                 <main className="flex-1 bg-white h-full overflow-y-auto">
+                    <div className="text-center mt-20 text-2xl font-semibold text-orange-700">
+                            Welcome Admin 🎉
+                        </div>
                     <Outlet />
                 </main>
             </div>
