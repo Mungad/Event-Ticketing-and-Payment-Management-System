@@ -3,20 +3,31 @@ import TopBar from "../components/TopBar";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import one from "../assets/images/gallery/1.jpg";
+import two from "../assets/images/gallery/2.jpeg";
+import three from "../assets/images/gallery/3.jpg";
+import four from "../assets/images/gallery/4.jpg";
+import five from "../assets/images/gallery/5.jpg";
+import six from "../assets/images/gallery/6.jpeg";
+import seven from "../assets/images/gallery/7.jpeg";
+import eight from "../assets/images/gallery/8.jpg";
+import nine from "../assets/images/gallery/9.jpg";
+import ten from "../assets/images/gallery/10.jpg";
+import eleven from "../assets/images/gallery/11.jpeg";
+import twelve from "../assets/images/gallery/12.jpeg";
 
 const images = [
   { src: one, title: "Exploring 3D Movies", description: "Enjoy the immersive experience of 3D cinema. Perfect for movie nights with friends and family!" },
-  { src: "/gallery/2.jpg", title: "Behind the Scenes", description: "Candid moment during a rehearsal. Capturing passion and teamwork." },
-  { src: "/gallery/3.jpg", title: "Crowd Cheers", description: "A moment of excitement and joy during the main event." },
-  { src: "/gallery/4.jpg", title: "Live Performance", description: "Spotlight on the talent. A night to remember." },
-  { src: "/gallery/5.jpg", title: "Stage Setup", description: "The calm before the storm. Behind-the-scenes work in progress." },
-  { src: "/gallery/6.jpg", title: "Audience Interaction", description: "Engagement is everything. Moments that matter." },
-  { src: "/gallery/7.jpg", title: "Tech Team", description: "Making the magic happen with sound and lights." },
-  { src: "/gallery/8.jpg", title: "Red Carpet", description: "Glamour and glitz at its best!" },
-  { src: "/gallery/9.jpg", title: "Award Moment", description: "The climax of achievement and recognition." },
-  { src: "/gallery/10.jpg", title: "Group Cheers", description: "Unity, joy, and celebration in one frame." },
-  { src: "/gallery/11.jpg", title: "After Party", description: "Winding down in style after an incredible event." },
-  { src: "/gallery/12.jpg", title: "Memories", description: "A still frame of unforgettable memories." },
+  { src: two, title: "Behind the Scenes", description: "Candid moment during a rehearsal. Capturing passion and teamwork." },
+  { src: three, title: "Crowd Cheers", description: "A moment of excitement and joy during the main event." },
+  { src: four, title: "Live Performance", description: "Spotlight on the talent. A night to remember." },
+  { src: five, title: "Stage Setup", description: "The calm before the storm. Behind-the-scenes work in progress." },
+  { src: six, title: "Audience Interaction", description: "Engagement is everything. Moments that matter." },
+  { src: seven, title: "Tech Team", description: "Making the magic happen with sound and lights." },
+  { src: eight, title: "Red Carpet", description: "Glamour and glitz at its best!" },
+  { src: nine, title: "Award Moment", description: "The climax of achievement and recognition." },
+  { src: ten, title: "Group Cheers", description: "Unity, joy, and celebration in one frame." },
+  { src: eleven, title: "After Party", description: "Winding down in style after an incredible event." },
+  { src: twelve, title: "Memories", description: "A still frame of unforgettable memories." },
 ];
 
 export default function GalleryPage() {
